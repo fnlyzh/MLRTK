@@ -3,5 +3,4 @@ Script for setting up a workspace for a new PyTorch project
 
 # Plans
 - [] Class for handling workspace directories
-- [] Class for calculating all sorts of performance metrics
-- [] Class for confusion matrix
+- [] Class for calculating all sorts of performance metrics, including confusion matrix
