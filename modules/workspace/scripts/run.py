@@ -21,12 +21,18 @@ def _archive_run(cfg) -> None:
     os.makedirs(archive_root, exist_ok=True)
 
     config_path = os.path.join(archive_root, "experiment_config.md")
-
     with open(config_path, "w") as f:
         f.write(f"# Experiment: {cfg.MODEL_NAME}\n\n")
-
         for key, val in asdict(cfg).items():
             f.write(f"| {key} | {val} |\n")
+    
+    journal_path = os.path.join(archive_root, "journal.md")
+    with open(journal_path, "w") as f:
+        f.write(f"# Journal Entry: {cfg.MODEL_NAME}\n\n")
+        f.write(f"**Version:** v{cfg.MODEL_VERSION}\n\n")
+        f.write(f"**Date:** {timestamp}\n\n")
+        f.write("## Description\n")
+        f.write(f"{cfg.MODEL_DESCRIPTION}\n")
 
     for src_dir, label in target_map.items():
         if os.path.exists(src_dir) and os.listdir(src_dir):
