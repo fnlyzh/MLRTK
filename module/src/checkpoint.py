@@ -1,22 +1,25 @@
 import torch
 import os
 
-def _load_checkpoint(checkpoint_path:str, model, optimizer, device:str) -> int:
+def run_load_checkpoint(checkpoint_path: str, model, optimizer, device: str) -> int:
     if not os.path.exists(checkpoint_path):
-        print(f"No checkpoint found at {checkpoint_path}. Starting from first epoch.")
-        return 1
+        print(f"[debug] run_load_checkpoint: checkpoint not found at {checkpoint_path}; starting from epoch 1.")
+        start_checkpoint = 1
+        return start_checkpoint
     
-    print(f"Loading checkpoint {checkpoint_path}.")
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    print(f"[debug] run_load_checkpoint: loaded from {checkpoint_path}.")
 
     model.load_state_dict(checkpoint['model_state_dict'])
     
     if optimizer and 'optimizer_state_dict' in checkpoint:
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-    
-    return checkpoint['epoch'] + 1        
 
-def _save_checkpoint(checkpoint_path:str, model, optimizer, epoch:int) -> None:
+    start_checkpoint = checkpoint['epoch'] + 1
+    
+    return start_checkpoint
+
+def run_save_checkpoint(checkpoint_path: str, model, optimizer, epoch:int) -> None:
     save_dict = {
         "epoch": epoch,
         "model_state_dict": model.state_dict(),
@@ -24,4 +27,4 @@ def _save_checkpoint(checkpoint_path:str, model, optimizer, epoch:int) -> None:
     }
     torch.save(save_dict, checkpoint_path)
 
-    print(f"Saved checkpoint at {checkpoint_path}.")
+    print(f"[debug] run_save_checkpoint: saved at {checkpoint_path}.")

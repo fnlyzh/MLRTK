@@ -3,7 +3,7 @@ import shutil
 from datetime import datetime
 from dataclasses import asdict
 
-def _archive_run(cfg) -> None:
+def run_archive_run(cfg) -> None:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     archive_root = os.path.join(
         cfg.ARCHIVES_DIR,
@@ -43,7 +43,7 @@ def _archive_run(cfg) -> None:
             except Exception as e:
                 print(f"Failed copying {src_dir}: {e}")
 
-def _reset_run(cfg):
+def run_reset_run(cfg):
     """
     Wipes all files from the directories defined in the config.
     Keeps directory structure intact.

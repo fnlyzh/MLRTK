@@ -28,5 +28,5 @@ class WorkspaceConfig:
     # might use this to construct a continuous thought journal
     JOURNAL_FILE:str = _MODEL_DIR + "/journal.txt"
 
-def get_config():
+def load_config():
     return WorkspaceConfig()
