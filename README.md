@@ -1,5 +1,6 @@
 # Machine Learning Research Tool Kit
 Script for setting up a workspace for a new PyTorch project
+Goal: no usage of AI to generate; feedback only.
 
 # Plans
 - [ ] Class for handling workspace directories

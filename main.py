@@ -1,13 +1,11 @@
-from module.controller import WorkspaceHandler
-from lab.config import load_config
+from src.api import MLRTKHandler
 
-def run_test() -> None:
-    print("[debug] test: initiating ...")
-    cfg = load_config()
+def main() -> None:
+    mlrtk = MLRTKHandler()
+    # mlrtk.create_directories()
+    # mlrtk.delete_directories()
+    mlrtk.reset_directories()
 
-    mlrkt = WorkspaceHandler(cfg)
-
-    print("[debug] test: complete.")
 
 if __name__ == "__main__":
-    run_test()
+    main()
