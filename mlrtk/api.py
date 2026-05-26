@@ -2,6 +2,7 @@ from .src.file_management.archive import run_deposit_archive, run_withdraw_archi
 from .src.checkpoints.checkpoint import run_save_checkpoint, run_load_checkpoint
 from .src.file_management.create_experiment import run_create_experiment
 from .src.file_management.delete_experiment import run_delete_experiment
+from .src.file_management.setup import run_initiate, run_reset
 
 class MLRTKHandler:
     def __init__(self, cfg) -> None:
@@ -10,6 +11,12 @@ class MLRTKHandler:
         self.cfg = cfg
 
         print("[debug] MLRTKHandler: created successfully.")
+    
+    def initiate(self) -> None:
+        run_initiate(self.cfg)
+    
+    def reset(self) -> None:
+        run_reset(self.cfg)
     
     def create_experiment(self) -> None:
         run_create_experiment(self.cfg)

@@ -5,8 +5,9 @@ from pathlib import Path
 
 @dataclass
 class MLRTKConfig(BaseModel):
-    ACTIVE_DIR: ClassVar[Path] = Path("lab/")
-    ARCHIVE_DIR: ClassVar[str] = Path("archive/")
+    PROJECT_DIR: ClassVar[Path] = Path("project/")
+    ACTIVE_DIR: ClassVar[Path] = PROJECT_DIR.joinpath("lab/")
+    ARCHIVE_DIR: ClassVar[str] = PROJECT_DIR.joinpath("archive/")
 
     """ Directory Setup """
     MODEL: ClassVar[str] = "test_one"    
