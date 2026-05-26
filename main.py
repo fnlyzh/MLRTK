@@ -4,10 +4,10 @@ from config import get_config
 def main() -> None:
     cfg = get_config()
     mlrtk = MLRTKHandler(cfg)
-    # mlrtk.create_directories()
-    # mlrtk.delete_directories()
-    # mlrtk.reset_directories()
-    mlrtk.withdraw_archive()
+    # mlrtk.withdraw_archive()
+    # mlrtk.create_experiment()
+    mlrtk.delete_experiment()
+    # mlrtk.deposit_archive()
 
 
 if __name__ == "__main__":

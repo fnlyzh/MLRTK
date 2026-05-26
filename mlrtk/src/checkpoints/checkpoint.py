@@ -6,8 +6,10 @@ References:
 from pathlib import Path
 import torch
 
+MODEL_WEIGHTS_NAME: str = "model_weights.pt"
+
 def run_save_checkpoint(cfg, model, optimizer, epoch) -> None:
-    p = Path(cfg.CHECKPOINTS_DIR).joinpath("model_weights.pth")
+    p: Path = cfg.CHECKPOINTS_DIR.joinpath(MODEL_WEIGHTS_NAME)
     
     torch.save({
         "epoch": epoch,
@@ -17,10 +19,11 @@ def run_save_checkpoint(cfg, model, optimizer, epoch) -> None:
 
 
 def run_load_checkpoint(cfg, model, optimizer=None) -> int:
-    p = Path(cfg.CHECKPOINTS_DIR).joinpath("model_weights.pth")
+    DEBUG_FILE: str = "run_load_checkpoint"
+    p: Path = cfg.CHECKPOINTS_DIR.joinpath(MODEL_WEIGHTS_NAME)
 
     if not p.exists():
-        print(f"[debug] run_load_checkpoint: no checkpoint found at {p}. Returning epoch=1.")
+        print(f"[debug] {DEBUG_FILE}: no checkpoint found at {p}. Returning epoch=1.")
         return 1
     
     checkpoint = torch.load(p, weights_only=True)
@@ -32,6 +35,6 @@ def run_load_checkpoint(cfg, model, optimizer=None) -> int:
     
     epoch = checkpoint["epoch"]
     
-    print(f"[debug] run_load_checkpoint: loaded weights, resuming from epoch {epoch}.")
+    print(f"[debug] {DEBUG_FILE}: loaded weights, resuming from epoch {epoch}.")
 
     return epoch
